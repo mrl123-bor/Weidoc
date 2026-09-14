@@ -1,0 +1,57 @@
+services:
+  postgres:
+    image: docker.m.daocloud.io/library/postgres:16-alpine
+    environment:
+      POSTGRES_USER: weidoc
+      POSTGRES_PASSWORD: weidoc
+      POSTGRES_DB: weidoc
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U weidoc -d weidoc"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.api
+    environment:
+      APP_ENV: production
+      HTTP_ADDR: ":8080"
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:8080}
+      DATABASE_URL: postgres://weidoc:weidoc@postgres:5432/weidoc?sslmode=disable
+      DATA_DIR: /data
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:-change-me-access}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-change-me-refresh}
+      ONLYOFFICE_URL: ${ONLYOFFICE_URL:-http://localhost:8081}
+      ONLYOFFICE_JWT_SECRET: ${ONLYOFFICE_JWT_SECRET:-onlyoffice-jwt-secret-change-me}
+      COOKIE_SECURE: "false"
+      WEB_DIST: /web
+    ports:
+      - "8080:8080"
+    volumes:
+      - filedata:/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  onlyoffice:
+    image: docker.m.daocloud.io/onlyoffice/documentserver:latest
+    environment:
+      JWT_ENABLED: "true"
+      JWT_SECRET: ${ONLYOFFICE_JWT_SECRET:-onlyoffice-jwt-secret-change-me}
+    ports:
+      - "8081:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - oo_data:/var/www/onlyoffice/Data
+
+volumes:
+  pgdata:
+  filedata:
+  oo_data:

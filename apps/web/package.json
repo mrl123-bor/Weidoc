@@ -1,0 +1,47 @@
+{
+  "name": "weidoc-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 5173"
+  },
+  "dependencies": {
+    "@tiptap/extension-code-block-lowlight": "^3.31.3",
+    "@tiptap/extension-image": "^3.31.3",
+    "@tiptap/extension-link": "^3.31.3",
+    "@tiptap/extension-placeholder": "^3.31.3",
+    "@tiptap/extension-table": "^3.31.3",
+    "@tiptap/extension-task-item": "^3.31.3",
+    "@tiptap/extension-task-list": "^3.31.3",
+    "@tiptap/extension-underline": "^3.31.3",
+    "@tiptap/react": "^3.31.3",
+    "@tiptap/starter-kit": "^3.31.3",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.13",
+    "dompurify": "^3.2.4",
+    "highlight.js": "^11.12.0",
+    "lowlight": "^3.3.0",
+    "lucide-react": "^1.45.0",
+    "marked": "^18.0.13",
+    "marked-highlight": "^2.2.4",
+    "pdfjs-dist": "^5.1.91",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.18.3",
+    "turndown": "^7.2.4",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@types/dompurify": "^3.2.0",
+    "@types/highlight.js": "^9.12.4",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@types/turndown": "^5.0.6",
+    "@vitejs/plugin-react": "^4.4.1",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5"
+  }
+}

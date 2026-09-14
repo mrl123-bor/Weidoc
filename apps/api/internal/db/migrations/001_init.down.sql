@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS md_search;
+DROP TABLE IF EXISTS audit_logs;
+DROP TABLE IF EXISTS recent_opens;
+DROP TABLE IF EXISTS edit_locks;
+DROP TABLE IF EXISTS file_versions;
+DROP TABLE IF EXISTS nodes;
+DROP TABLE IF EXISTS workspaces;
+DROP TABLE IF EXISTS refresh_tokens;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS system_settings;
